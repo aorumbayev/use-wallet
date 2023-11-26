@@ -137,7 +137,8 @@ class DeflyWalletClient extends BaseClient {
     connectedAccounts: string[],
     txnGroups: Uint8Array[] | Uint8Array[][],
     indexesToSign?: number[],
-    returnGroup = true
+    returnGroup = true,
+    signerAccount?: string
   ) {
     // If txnGroups is a nested array, flatten it
     const transactions: Uint8Array[] = Array.isArray(txnGroups[0])
@@ -195,7 +196,7 @@ class DeflyWalletClient extends BaseClient {
     }, [])
 
     // Sign them with the client.
-    const result = await this.#client.signTransaction([txnsToSign])
+    const result = await this.#client.signTransaction([txnsToSign], signerAccount)
 
     // Join the newly signed transactions with the original group of transactions.
     const signedTxns = transactions.reduce<Uint8Array[]>((acc, txn, i) => {

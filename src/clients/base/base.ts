@@ -31,7 +31,8 @@ abstract class BaseClient {
     connectedAccounts: string[],
     txnGroups: Uint8Array[] | Uint8Array[][],
     indexesToSign?: number[],
-    returnGroup?: boolean
+    returnGroup?: boolean,
+    signerAccount?: string
   ): Promise<Uint8Array[]>
 
   protected constructor(

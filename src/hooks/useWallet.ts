@@ -167,7 +167,8 @@ export default function useWallet() {
   const signTransactions = async (
     transactions: Uint8Array[] | Uint8Array[][],
     indexesToSign?: number[],
-    returnGroup = true
+    returnGroup = true,
+    signerAccount?: string
   ) => {
     const walletClient = getClient(activeAccount?.providerId)
 
@@ -179,7 +180,8 @@ export default function useWallet() {
       connectedActiveAccounts.map((acct) => acct.address),
       transactions,
       indexesToSign,
-      returnGroup
+      returnGroup,
+      signerAccount
     )
 
     return signedTransactions
